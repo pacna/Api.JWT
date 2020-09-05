@@ -1,6 +1,8 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { JwtService } from './jwt.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBody } from '@nestjs/swagger';
+import { CreateClaimsRequest } from './types/create-claims-request';
+import { CreateClaimsRequestModel } from './swagger-models/create-claims-request.model';
 
 @ApiTags("jwt")
 @Controller("jwt")
@@ -13,7 +15,8 @@ export class JwtController {
   }
 
   @Post()
-  createJwt(): void {
-    return this.jwtService.createJwt();
+  @ApiBody({type: CreateClaimsRequestModel})
+  async createJwt(@Body() request: CreateClaimsRequest ): Promise<string> {
+    return await this.jwtService.createJwt(request);
   }
 }
