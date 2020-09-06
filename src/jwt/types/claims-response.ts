@@ -1,5 +1,5 @@
 export class ClaimsResponse {
     jti: string;
-    iat: string;
+    iat: number;
     iss: string;
 }

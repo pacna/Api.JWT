@@ -1,10 +1,17 @@
+// nestjs
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
-import { JwtService } from './jwt.service';
 import { ApiTags, ApiBody, ApiParam, ApiResponse } from '@nestjs/swagger';
-import { CreateClaimsRequest } from './types/create-claims-request';
+
+// swagger model
 import { CreateClaimsRequestModel } from './swagger-models/create-claims-request.model';
-import { ClaimsResponse } from './types/claims-response';
 import { ClaimsResponseModel } from './swagger-models/claims-response.model';
+
+// types
+import { ClaimsResponse } from './types/claims-response';
+import { CreateClaimsRequest } from './types/create-claims-request';
+
+// services
+import { JwtService } from './jwt.service';
 
 @ApiTags("jwt")
 @Controller("jwt")

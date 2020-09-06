@@ -1,6 +1,15 @@
-import { Injectable } from '@nestjs/common';
+// nestjs
+import { 
+  Injectable,
+  BadRequestException,
+  PreconditionFailedException 
+} from '@nestjs/common';
+
+// types
 import { CreateClaimsRequest } from './types/create-claims-request';
 import { ClaimsResponse } from './types/claims-response';
+
+// third party libs
 import * as jwt from 'jsonwebtoken';
 import * as uid from 'uniqid';
 import * as hash from 'object-hash';
@@ -17,7 +26,8 @@ export class JwtService {
     return new Promise((resolve: Function, reject: Function) => {
       jwt.verify(token, this.key, (error: any, decoded: ClaimsResponse) => {
           if (error) {
-            return reject('oops')
+            // throw a 400 to handle any error messages
+            throw new BadRequestException(error.message);          
           }
           return resolve(decoded);
       })
@@ -27,15 +37,39 @@ export class JwtService {
   async createJwt(request: CreateClaimsRequest): Promise<string> {
     const {
       expirationDate,
-      ...claims
+      claims
     } = request;
-    return new Promise((resolve: Function, reject: Function) => {
-        jwt.sign(claims, this.key, { jwtid: uid(), issuer: this.issuer }, (error: any, token: string) => {
-            if(error) {
-                return reject('oops')
-            }
-            return resolve(token);
-        })
-    })
+
+    if (this.isValidTime(expirationDate)) {
+      return new Promise((resolve: Function, reject: Function) => {
+          jwt.sign(claims, this.key, { 
+            jwtid: uid(), 
+            issuer: this.issuer,
+            expiresIn: this.setTimeToExpire(expirationDate)
+           }, (error: any, token: string) => {
+              if(error) {
+                throw new BadRequestException(error.message)
+              }
+              return resolve(token);
+          })
+      })
+    } else {
+      throw new PreconditionFailedException('Time is set in the past');
+    }
+
+  }
+
+  setTimeToExpire(expirationDate: string): number {
+    const expireTime: number = Date.parse(expirationDate);
+    const currentTime: number = new Date().getTime();
+  
+    return Math.floor((expireTime - currentTime) / 1000);
+  }
+
+  isValidTime(expirationDate: string): boolean {
+    const expireTime: number = Date.parse(expirationDate);
+    const currentTime: number = new Date().getTime();
+
+    return expireTime > currentTime;
   }
 }
