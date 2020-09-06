@@ -4,7 +4,7 @@ A simple jwt service.
 
 ## Prerequisites
 
-* [nodejs]("https://nodejs.org/en/")
+* [nodejs](https://nodejs.org/en/)
 
 ## Installation
 
