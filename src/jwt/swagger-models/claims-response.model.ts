@@ -11,10 +11,11 @@ export class ClaimsResponseModel {
     jti: string;
 
     @ApiProperty()
-    iat: string;
+    iat: number;
 
     @ApiProperty()
     iss: string;
 
-
+    @ApiProperty()
+    exp: number;
 }
