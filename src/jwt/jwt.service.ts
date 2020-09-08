@@ -14,6 +14,7 @@ import * as jwt from 'jsonwebtoken';
 import * as uid from 'uniqid';
 import * as hash from 'object-hash';
 import * as dotenv from 'dotenv';
+import * as moment from 'moment';
 
 dotenv.config();
 
@@ -60,15 +61,15 @@ export class JwtService {
   }
 
   setTimeToExpire(expirationDate: string): number {
-    const expireTime: number = Date.parse(expirationDate);
-    const currentTime: number = new Date().getTime();
+    const expireTime: number = moment(expirationDate).unix();
+    const currentTime: number = moment().unix();
   
-    return Math.floor((expireTime - currentTime) / 1000);
+    return expireTime - currentTime;
   }
 
   isValidTime(expirationDate: string): boolean {
-    const expireTime: number = Date.parse(expirationDate);
-    const currentTime: number = new Date().getTime();
+    const expireTime: number = moment(expirationDate).unix();
+    const currentTime: number = moment().unix();
 
     return expireTime > currentTime;
   }

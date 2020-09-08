@@ -32,7 +32,7 @@ describe('JwtController', () => {
   describe('jwt endpoint', () => {
     it('should create a jwt', async() => {
       // ARRANGE
-      const token = "myprecioustoken";
+      const token: string = "myprecioustoken";
       const request = new CreateClaimsRequest();
       request.claims = {
         foo: 'foo'
