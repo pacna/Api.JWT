@@ -1,10 +1,10 @@
 // third party libs
-import { IsDateString, IsNotEmptyObject, IsNotEmpty } from 'class-validator';
+import { IsDateString, IsNotEmptyObject } from 'class-validator';
 
 export class CreateClaimsRequest {
-    @IsNotEmptyObject()
-    claims: object;
+  @IsNotEmptyObject()
+  claims: object;
 
-    @IsDateString()
-    expirationDate: string;
+  @IsDateString()
+  expirationDate: string;
 }

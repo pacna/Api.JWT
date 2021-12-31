@@ -1,18 +1,18 @@
 # Api Jwt
 
-A simple jwt service.
+A simple JWT (JSON Web Token) node service.
 
 ## Prerequisites
 
-* [nodejs](https://nodejs.org/en/)
+- [nodejs](https://nodejs.org/en/)
 
-## Installation
+## How to install dependencies
 
 ```bash
-$ npm install
+$ npm ci
 ```
 
-## Running the app
+## Running the app locally
 
 ```bash
 # development
@@ -20,6 +20,13 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
+```
+
+## Running the app in production
+
+```bash
+
+$ npm run start:prod
 ```
 
 ## Test
