@@ -29,7 +29,7 @@ Before running API JWT, make sure you have the following dependencies installed 
 
 API JWT uses the following environment variable:
 
-- `ISS`: The issuer of the JWT.
+-   `ISS`: The issuer of the JWT.
 
 Create a `.env` file in the root directory and add the `ISS` variable:
 
@@ -50,16 +50,18 @@ $ make install
 
 ## Usage
 
-To run the service locally, use:
+You can start the service using the following commands:
 
-```bash
-$ make local
-```
-
-To run the service in production mode, use:
+For local or production mode:
 
 ```bash
 $ make run
+```
+
+For watch mode:
+
+```bash
+$ make watch
 ```
 
 ## Running Tests

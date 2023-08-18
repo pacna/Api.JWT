@@ -43,7 +43,7 @@ def test_create_jwt() -> None:
 
     # ACT
     response: Response = test_client.post(
-        url="/jwt", json=loads(request.json()))
+        url="/jwt", json=loads(request.model_dump_json()))
 
     # ASSERT
     assert (response.status_code == status.HTTP_200_OK)

@@ -2,6 +2,7 @@ from typing import Any, Dict
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from fastapi.openapi.utils import get_openapi
+from uvicorn import Config, Server
 
 from controllers.jwt import router
 
@@ -29,4 +30,8 @@ def custom_openapi() -> Dict[str, Any]:
 
 app.openapi = custom_openapi
 
-print('Starting Api.JWT')
+
+if __name__ == "__main__":
+    print('Starting Api.JWT')
+    server = Server(Config("main:app", port=8000, log_level="info"))
+    server.run()
