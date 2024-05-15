@@ -9,8 +9,8 @@
 # __pycache__
 __pycache__
 
-# env
-env
+# Api.JWT
+obj
+bin
+out
 
-# .env
-.env
