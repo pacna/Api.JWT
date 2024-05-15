@@ -6,9 +6,6 @@
 !.vscode/extensions.json
 
 
-# __pycache__
-__pycache__
-
 # Api.JWT
 obj
 bin

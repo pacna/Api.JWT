@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{96AABC73-66CC-40FD-A680-1071C4AAC645}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.JWT", "src\Api.JWT\Api.JWT.csproj", "{0C8D6005-A3B0-4F32-A223-1357B8BF3E65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.JWT.Tests", "src\Api.JWT.Tests\Api.JWT.Tests.csproj", "{DC241A60-810F-4118-BD02-75306A095E1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C8D6005-A3B0-4F32-A223-1357B8BF3E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8D6005-A3B0-4F32-A223-1357B8BF3E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8D6005-A3B0-4F32-A223-1357B8BF3E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8D6005-A3B0-4F32-A223-1357B8BF3E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC241A60-810F-4118-BD02-75306A095E1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC241A60-810F-4118-BD02-75306A095E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC241A60-810F-4118-BD02-75306A095E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC241A60-810F-4118-BD02-75306A095E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C8D6005-A3B0-4F32-A223-1357B8BF3E65} = {96AABC73-66CC-40FD-A680-1071C4AAC645}
+		{DC241A60-810F-4118-BD02-75306A095E1B} = {96AABC73-66CC-40FD-A680-1071C4AAC645}
+	EndGlobalSection
+EndGlobal
