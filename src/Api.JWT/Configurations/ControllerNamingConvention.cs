@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace Api.JWT.Miscs;
+namespace Api.JWT.Configurations;
 
 public class ControllerNamingConvention : IControllerModelConvention
 {

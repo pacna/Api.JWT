@@ -7,6 +7,8 @@ WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddCustomMediatR()
     .AddSwaggerDoc()
+    .AddContexts()
+    .AddRepositories()
     .AddCustomControllers()
     .AddControllerConvention()
     .AddEndpointsApiExplorer()

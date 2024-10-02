@@ -1,4 +1,7 @@
-using Api.JWT.Miscs;
+using Api.JWT.Configurations;
+using Api.JWT.Contexts;
+using Api.JWT.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 namespace Api.JWT.StartupExtensions;
@@ -21,6 +24,16 @@ internal static class ServiceCollectionExtension
                 Description = "A simple JWT (JSON Web Token) service"
             });
         });
+    }
+
+    internal static IServiceCollection AddContexts(this IServiceCollection services)
+    {
+        return services.AddDbContext<JWTContext>(options => options.UseInMemoryDatabase("test"));
+    }
+
+    internal static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        return services.AddScoped<IJWTRepository, JWTRepository>();
     }
 
     internal static IServiceCollection AddControllerConvention(this IServiceCollection services)
