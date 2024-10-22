@@ -5,13 +5,11 @@ namespace Api.JWT.Controllers;
 
 internal static class MapperExtension
 {
-    public static CreateJWTCommand ToCommand(this JWTPostRequest request)
-    {
-        return new CreateJWTCommand(request.Claims, request.ExpireAt);
-    }
+    public static GetJWTQuery ToQuery(this JWTGetRequest request) => new(request.Token);
 
-    public static DeleteJWTCommand ToCommand(this JWTDeleteRequest request)
-    {
-        return new DeleteJWTCommand(request.Token);
-    }
+    public static GetJtiQuery ToQuery(this JtiGetRequest request) => new(request.Jti);
+
+    public static CreateJWTCommand ToCommand(this JWTPostRequest request) => new(request.Claims, request.ExpireAt);
+
+    public static DeleteJWTCommand ToCommand(this JWTDeleteRequest request) => new(request.Token);
 }

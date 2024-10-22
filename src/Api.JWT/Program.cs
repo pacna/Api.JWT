@@ -8,6 +8,7 @@ builder.Services
     .AddCustomMediatR()
     .AddSwaggerDoc()
     .AddContexts()
+    .AddServices()
     .AddRepositories()
     .AddCustomControllers()
     .AddControllerConvention()
