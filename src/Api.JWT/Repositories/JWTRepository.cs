@@ -16,9 +16,10 @@ internal class JWTRepository(JWTContext context) : IJWTRepository
         return await context.JWT.FirstOrDefaultAsync(x => x.Token == token);
     }
 
-    public async Task AddAsync(JWTEntity entity)
+    public async Task AddAsync(JWTEntity entity, CancellationToken cancellationToken = default)
     {
-        await context.AddAsync(entity);
+        await context.AddAsync(entity, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
     public async Task DeleteByTokenAsync(string token)
@@ -31,5 +32,6 @@ internal class JWTRepository(JWTContext context) : IJWTRepository
         }
         
         context.JWT.Remove(entity);
+        context.SaveChanges();
     }
 }

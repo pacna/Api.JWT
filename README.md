@@ -2,7 +2,7 @@
 
 <img alt="Test CI" src="https://github.com/pacna/Api.JWT/workflows/Test%20CI/badge.svg" />
 
-Api JWT is a Python-based service that provides a simple way to create and maintain JSON Web Tokens (JWTs).
+Api JWT is a Restful API service that provides a simple way to create and maintain JSON Web Tokens (JWTs).
 
 ## Example
 

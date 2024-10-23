@@ -2,6 +2,7 @@ using Api.JWT.Configurations;
 using Api.JWT.Contexts;
 using Api.JWT.Repositories;
 using Api.JWT.Services;
+using Api.JWT.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -30,6 +31,11 @@ internal static class ServiceCollectionExtension
     internal static IServiceCollection AddContexts(this IServiceCollection services)
     {
         return services.AddDbContext<JWTContext>(options => options.UseInMemoryDatabase("test"));
+    }
+
+    internal static IServiceCollection AddSetting(this IServiceCollection services, ApplicationSetting setting)
+    {
+        return services.AddSingleton<IApplicationSetting>(setting);
     }
 
     internal static IServiceCollection AddServices(this IServiceCollection services)

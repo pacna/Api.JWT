@@ -1,18 +1,22 @@
 using Api.JWT.Controllers.Models;
+using Api.JWT.Repositories;
+using Api.JWT.Repositories.Entities;
 using MediatR;
 
 namespace Api.JWT.Handlers;
 
-public sealed class GetJtiQuery(string id) : IRequest<JwtResponse>
+public sealed class GetJtiQuery(string id) : IRequest<JWTResponse>
 {
     public string Jti => id;
 
 }
 
-public class GetJtiQueryHandler: IRequestHandler<GetJtiQuery, JwtResponse>
+public class GetJtiQueryHandler(IJWTRepository repo): IRequestHandler<GetJtiQuery, JWTResponse?>
 {
-    public Task<JwtResponse> Handle(GetJtiQuery query, CancellationToken cancellationToken)
+    public async Task<JWTResponse?> Handle(GetJtiQuery query, CancellationToken cancellationToken)
     {
-        return Task.FromResult(new JwtResponse());
+        JWTEntity? entity = await repo.GetAsync(query.Jti);
+        
+        return entity?.ToResponse();
     }
 }

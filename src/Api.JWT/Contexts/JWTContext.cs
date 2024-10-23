@@ -3,12 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.JWT.Contexts;
 
-public class JWTContext : DbContext
+public class JWTContext(DbContextOptions<JWTContext> options) : DbContext(options)
 {
-    public JWTContext(DbContextOptions<JWTContext> options) : base(options)
-    {
-    }
-
     public DbSet<JWTEntity> JWT { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

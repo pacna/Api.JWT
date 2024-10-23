@@ -1,4 +1,6 @@
 using Api.JWT.Controllers.Models;
+using Api.JWT.Repositories;
+using Api.JWT.Repositories.Entities;
 using Api.JWT.Services;
 using MediatR;
 
@@ -10,15 +12,24 @@ public sealed class GetJWTQuery(string token) : IRequest<ClaimResponse>
 
 }
 
-public class GetJWTQueryHandler(IAuthenticationService authService): IRequestHandler<GetJWTQuery, ClaimResponse>
+public class GetJWTQueryHandler(
+    IAuthenticationService authService, 
+    IJWTRepository repo): IRequestHandler<GetJWTQuery, ClaimResponse?>
 {
-    public Task<ClaimResponse> Handle(GetJWTQuery query, CancellationToken cancellationToken)
+    public async Task<ClaimResponse?> Handle(GetJWTQuery query, CancellationToken cancellationToken)
     {
-        if (!string.IsNullOrEmpty(query.Token))
+        if (!await ValidateAsync(query.Token))
         {
-            return Task.FromResult(new ClaimResponse(authService.GetClaims(query.Token)));
+            return null;
         }
 
-        return null;
+        return new ClaimResponse(authService.GetClaims(query.Token));
+    }
+
+    private async Task<bool> ValidateAsync(string token)
+    {
+        JWTEntity? entity = await repo.GetByTokenAsync(token);
+
+        return entity != null;
     }
 }

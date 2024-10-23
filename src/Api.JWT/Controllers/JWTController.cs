@@ -8,11 +8,13 @@ public class JWTController(IMediator mediator) : BaseController
 {
     [HttpGet("{token}/claims")]
     [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(ClaimResponse))]
-    public async Task<IActionResult> GetClaimsAsync(string token) => Ok(await mediator.Send(new JWTGetRequest(token).ToQuery()));
+    [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetClaimsAsync(string token) => OkIfFound(await mediator.Send(new JWTGetRequest(token).ToQuery()));
 
     [HttpGet("{id}")]
     [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(ClaimResponse))]
-    public async Task<IActionResult> GetAsync(string id) => Ok(await mediator.Send(new JtiGetRequest(id).ToQuery()));
+    [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetAsync(string id) => OkIfFound(await mediator.Send(new JtiGetRequest(id).ToQuery()));
 
     [HttpPost]
     [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(string))]

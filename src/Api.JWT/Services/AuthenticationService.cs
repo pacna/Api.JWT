@@ -1,21 +1,22 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Api.JWT.Settings;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Api.JWT.Services;
 
-internal class AuthenticationService(
-    IConfiguration configuration, 
+public class AuthenticationService(
+    IApplicationSetting setting,
     ILogger<AuthenticationService> logger) : IAuthenticationService
 {
     public string GenerateToken(Dictionary<string, string> claims, DateTime expireAt)
     {
         try
         {
-            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(configuration.GetSection("JwtSecret").Get<string>()!));
+            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(setting.JwtSecret));
             JwtSecurityToken token = new(
-                issuer: configuration.GetSection("Issuer").Get<string>()!,
+                issuer: setting.Issuer,
                 claims: ToClaimList(claims),
                 expires: expireAt,
                 signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)

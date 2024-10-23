@@ -16,7 +16,8 @@ public sealed class CreateJWTCommand(
 
 public class CreateJWTCommandHandler(
     IAuthenticationService authService,
-    IJWTRepository repo): IRequestHandler<CreateJWTCommand, string>
+    IJWTRepository repo,
+    ILogger<CreateJWTCommandHandler> logger): IRequestHandler<CreateJWTCommand, string>
 {
     public async Task<string> Handle(CreateJWTCommand command, CancellationToken cancellationToken)
     {
@@ -24,11 +25,20 @@ public class CreateJWTCommandHandler(
         string jtiId = Guid.NewGuid().ToString();
         claims.TryAdd(JwtRegisteredClaimNames.Jti, jtiId);
 
-        string token = authService.GenerateToken(claims, command.ExpireAt);
+        try
+        {
+            string token = authService.GenerateToken(claims, command.ExpireAt);
 
-        JWTEntity entity = new(jtiId, token);
+            JWTEntity entity = new(jtiId, token);
 
-        await repo.AddAsync(entity);
-        return entity.Token;
+            await repo.AddAsync(entity, cancellationToken);
+            return entity.Token;
+        }
+        catch(Exception ex)
+        {
+            logger.LogError(ex.Message, [ex.Data]);
+
+            return string.Empty;
+        }
     }
 }
