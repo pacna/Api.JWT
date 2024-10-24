@@ -2,66 +2,42 @@
 
 <img alt="Test CI" src="https://github.com/pacna/Api.JWT/workflows/Test%20CI/badge.svg" />
 
-Api JWT is a Python-based service that provides a simple way to create and maintain JSON Web Tokens (JWTs).
+Api JWT is a RESTful service that simplifies the generation and management of JSON Web Tokens (JWTs).
 
 ## Example
 
 To create a JWT, send a POST request to the API with the keys and values as the payload:
 
 ```bash
-$ curl --header "Content-Type: application/json" --request POST --data '{"claims": {"foo":"bar"}, "expireAt":"2024-01-03T05:53:25.537Z"}' http://localhost:8000/jwt
+$ curl --header "Content-Type: application/json" --request POST --data '{"claims": {"foo":"bar"}, "expireAt":"2024-01-03T05:53:25.537Z"}' http://localhost:5000/api/v1/jwt
 ```
 
 You should receive a response that contains the JWT:
 
-```
-{"jwt":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpc3MiOiJIRUxPIiwiZXhwIjoxNzA0MjYxMjA1LCJqdGkiOiI1YmUyNDQxNS04NGE3LTQ4MmMtOWQzNy04ZmNiMjk4ZWVkMzUifQ.soVA01RmQam2909vK9nIOi5s3p2l-39z8-WmTxZolQo"}
+```json
+eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJqdGkiOiJkMjAwY2E4NS05MDk1LTQyYWItOTE2OS1mYTZlY2Q2NTVhMDgiLCJleHAiOjE3MzU4ODM2MDUsImlzcyI6IkFwaS5KV1QifQ.CeZqhdjJFB8As0jn09UezuM8zpD0Z0d7Ye6S3RESUkg
 ```
 
-## Ubuntu Prerequisites
+## Prerequisites
 
 Before running API JWT, make sure you have the following dependencies installed on your system:
 
-1. [Python](https://www.python.org/downloads/) (python 3.10)
-2. [Make](https://www.gnu.org/software/make/)
+-   [.NET Core](https://dotnet.microsoft.com/en-us/download) (v8)
 
-## Configuration
+## How to Run Locally
 
-API JWT uses the following environment variable:
+Follow the commands below to start the service:
 
--   `ISS`: The issuer of the JWT.
-
-Create a `.env` file in the root directory and add the `ISS` variable:
-
-```python
-# .env
-ISS = IAMTHEGREATISSUER
-```
-
-**Note:** The `ISS` variable is optional. If not provided, a default value will be used.
-
-## Installation
-
-To install the required dependencies, run:
+1. To run the service:
 
 ```bash
-$ make install
+$ dotnet run --project=./src/Api.JWT
 ```
 
-## Usage
-
-You can start the service using the following commands:
-
-For local or production mode:
+2. To run the service in watch mode:
 
 ```bash
-$ make run
-```
-
-For watch mode:
-
-```bash
-$ make watch
+$ dotnet watch run --project=./src/Api.JWT
 ```
 
 ## Running Tests
@@ -69,7 +45,7 @@ $ make watch
 To run the test, use:
 
 ```bash
-$ make test
+$ dotnet test
 ```
 
 **note:** The API currently uses an in-memory data store and does not require a database.
