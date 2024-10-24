@@ -33,7 +33,7 @@ internal static class ServiceCollectionExtension
         return services.AddDbContext<JWTContext>(options => options.UseInMemoryDatabase("test"));
     }
 
-    internal static IServiceCollection AddSetting(this IServiceCollection services, ApplicationSetting setting)
+    internal static IServiceCollection AddSettings(this IServiceCollection services, ApplicationSetting setting)
     {
         return services.AddSingleton<IApplicationSetting>(setting);
     }
